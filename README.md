@@ -4,7 +4,6 @@
   <img src="https://github.com/user-attachments/assets/69170457-058a-40eb-96dd-02b21ee13c6b" width="50%">
 </p>
 
-
 ## 📌 Overview  
 This repository contains a **robotic hand simulation** developed in Unity, controlled using a **Python API (FastAPI)** for real-time kinematics.  
 
@@ -13,8 +12,22 @@ This repository contains a **robotic hand simulation** developed in Unity, contr
 ✅ **Python API for real-time movement control**  
 ✅ **Forward & Inverse Kinematics using `roboticstoolbox`**  
 ✅ **Seamless communication between Python & Unity**  
+✅ **Error handling and optimized logging**  
+✅ **Smooth real-time updates with non-blocking API requests**  
+✅ **Supports expansion for additional robotic movements**  
 
 ---
+
+## 🎯 **Challenge & Goal**  
+This simulation was created to **test real-time robotic control using Unity and Python**. The goal is to develop a scalable solution that enables:  
+- **Accurate finger articulation** based on inverse kinematics.  
+- **Dynamic communication between a physics engine (Unity) and an external API (Python).**  
+- **Real-time adjustments and flexibility in motion handling.**  
+
+### 💡 **Future Improvements**  
+🔹 **WebSocket support** for even faster data transmission.  
+🔹 **Machine learning-based motion prediction** to enhance movement fluidity.  
+🔹 **Integration with real robotic hardware** for testing beyond simulation.  
 
 ---
 
@@ -37,6 +50,7 @@ cd API
 pip install -r requirements.txt
 uvicorn RobotAPI:app --reload
 ```
+
 **📡 API Endpoint Example:**  
 ```
 http://127.0.0.1:8000/0?link2=1.0
@@ -64,12 +78,16 @@ _📌 Add images here_
 ---
 
 ## 🔥 **Problems Solved**
-_📌 Add problem descriptions and solutions_  
+_📌 Key challenges and solutions implemented:_  
 
 - **Issue:** Delay in movement synchronization.  
   - ✅ **Solution:** Optimized API requests with non-blocking I/O.  
 - **Issue:** Inverse kinematics instability.  
   - ✅ **Solution:** Tuned optimization method for better convergence.  
+- **Issue:** Handling multiple finger movements in parallel.  
+  - ✅ **Solution:** Implemented thread-safe handling in FastAPI.  
+- **Issue:** Sudden API disconnection causing Unity freezing.  
+  - ✅ **Solution:** Added error handling and automatic API reconnection logic.  
 
 ---
 
@@ -90,6 +108,8 @@ print(response.json())  # Expected output: {'newAngle': <calculated_angle>}
 - **Python (FastAPI)** ⚡ for API communication  
 - **Robotics Toolbox (`roboticstoolbox`)** 🤖 for kinematics  
 - **Uvicorn** 🚀 for running the API  
+- **HTTP Requests** 📡 for Unity-Python communication  
+- **Multithreading for parallel movement handling**  
 
 ---
 
