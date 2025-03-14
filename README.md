@@ -70,10 +70,25 @@ This project integrates a **Python-based API** with Unity, allowing real-time ro
 
 ---
 
-## 📸 Simulation Screenshots  
-_📌 Add images here_  
+## 📸 **Media Gallery**
+### 🎥 **Simulation Videos**
+_Add video links or GIFs showcasing the robotic hand movements in Unity._  
 
-![Simulation Screenshot](path/to/simulation-image.png)  
+📹 [Watch the Full Simulation](path/to/video.mp4)  
+📹 [Inverse Kinematics Demonstration](path/to/ik-demo.mp4)  
+
+### 🖼️ **Screenshots of the Simulation**
+_Add images here to visually explain the project._  
+
+<p align="center">
+  <img src="path/to/simulation-image1.png" width="45%">
+  <img src="path/to/simulation-image2.png" width="45%">
+</p>
+
+<p align="center">
+  <img src="path/to/simulation-image3.png" width="45%">
+  <img src="path/to/simulation-image4.png" width="45%">
+</p>
 
 ---
 
