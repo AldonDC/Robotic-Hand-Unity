@@ -1,6 +1,9 @@
 # 🖐️ Robotic Hand Unity - Python API Integration  
 
-![Project Banner](path/to/banner-image.png)  
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/69170457-058a-40eb-96dd-02b21ee13c6b" width="50%">
+</p>
+
 
 ## 📌 Overview  
 This repository contains a **robotic hand simulation** developed in Unity, controlled using a **Python API (FastAPI)** for real-time kinematics.  
