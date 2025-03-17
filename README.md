@@ -18,24 +18,45 @@ Este proyecto integra una mano robótica simulada en Unity con una API desarroll
 
 ---
 
-## 📖 Índice
 
-1. [Introducción](#introducción)
-2. [Fundamentos Matemáticos](#fundamentos-matemáticos)
-   - [Ecuaciones del Robot](#ecuaciones-del-robot)
-   - [Modelado del Contacto](#modelado-del-contacto)
-3. [Cinemática](#cinemática)
-   - [Cinemática Directa](#cinemática-directa)
-   - [Cinemática Inversa](#cinemática-inversa)
-4. [Modelos de Agarre](#modelos-de-agarre)
-   - [Rodamiento y Deslizamiento](#rodamiento-y-deslizamiento)
-5. [Implementación](#implementación)
-   - [Estructura del Código](#estructura-del-código)
-   - [Proceso de Simulación](#proceso-de-simulación)
-6. [Resultados](#resultados)
-7. [Discusión y Futuro](#discusión-y-futuro)
-8. [Referencias](#referencias)
-9. [Instalación y Uso](#instalación-y-uso)
+## 📖 Índice  
+
+1. [Introducción](#introducción)  
+2. [Fundamentos Matemáticos](#fundamentos-matemáticos)  
+   - [Ecuaciones del Robot](#ecuaciones-del-robot)  
+   - [Modelado del Contacto](#modelado-del-contacto)  
+   - [Mecánica del Sistema](#mecánica-del-sistema)  
+   - [Dinámica del Sistema](#dinámica-del-sistema)  
+3. [Cinemática](#cinemática)  
+   - [Cinemática Directa](#cinemática-directa)  
+   - [Cinemática Inversa](#cinemática-inversa)  
+   - [Movimientos del Objeto](#movimientos-del-objeto)  
+4. [Modelos de Agarre](#modelos-de-agarre)  
+   - [Rodamiento y Deslizamiento](#rodamiento-y-deslizamiento)  
+   - [Comparación de Modelos](#comparación-de-modelos)  
+5. [Estado del Arte en Agarre Robótico](#estado-del-arte-en-agarre-robótico)  
+   - [Enfoques Analíticos](#enfoques-analíticos)  
+   - [Aprendizaje Automático en Agarre](#aprendizaje-automático-en-agarre)  
+   - [Modelos Híbridos](#modelos-híbridos)  
+6. [Implementación](#implementación)  
+   - [Estructura del Código](#estructura-del-código)  
+   - [Módulo de Dedo](#módulo-de-dedo)  
+   - [Módulo del Robot](#módulo-del-robot)  
+   - [Módulo del Objeto](#módulo-del-objeto)  
+   - [Proceso de Simulación](#proceso-de-simulación)  
+   - [API y Control Remoto](#api-y-control-remoto)  
+7. [Resultados y Validación](#resultados-y-validación)  
+   - [Optimización del Modelo](#optimización-del-modelo)  
+   - [Evaluación del Agarre](#evaluación-del-agarre)  
+8. [Discusión y Futuro](#discusión-y-futuro)  
+   - [Mejoras en Cinemática Inversa](#mejoras-en-cinemática-inversa)  
+   - [Control Adaptativo en Tiempo Real](#control-adaptativo-en-tiempo-real)  
+9. [Referencias](#referencias)  
+10. [Instalación y Uso](#instalación-y-uso)  
+    - [Requisitos](#requisitos)  
+    - [Instalación](#instalación)  
+    - [Ejecución](#ejecución)  
+
 
 ---
 
@@ -103,12 +124,104 @@ Para determinar los ángulos de los eslabones del dedo dados \(x\) e \(y\):
 Esto permite que la mano robótica alcance posiciones específicas al manipular el objeto.
 
 
+## 🧪 Modelos de Agarre
 
+El agarre de objetos con la mano robótica se modela considerando dos modos principales de contacto:
+
+### 📌 Rodamiento y Deslizamiento  
+
+Se definen dos modos principales de movimiento al sujetar el objeto:
+
+1. **Rodamiento**: Cuando la velocidad relativa entre el objeto y la punta del dedo es cero en el punto de contacto.
+
+   <p align="center">
+      <img src="https://github.com/user-attachments/assets/482be951-9e81-441e-85d6-f02b503c119f" alt="Ecuación de Rodamiento">
+   </p>
+
+3. **Deslizamiento**: Ocurre cuando el punto de contacto cambia debido a la fricción:
+
+   <p align="center">
+      <img src="https://github.com/user-attachments/assets/21dd982e-d62d-4e49-b118-70a78c7d2345" alt="Ecuación de Deslizamiento">
+   </p>
+
+
+     
+
+### 📌 Comparación de Modelos
+| Característica | Rodamiento | Deslizamiento |
+|--------------|------------|--------------|
+| Tipo de contacto | Fijo | Variable |
+| Fricción | Mantiene el objeto en contacto | Opuesta al movimiento |
+| Modelado | Cinemática y dinámica | Fuerzas de fricción |
 
 ---
 
-## 🚀 **Installation & Setup**
-### 1️⃣ Clone the Repository
+## ⚙️ Implementación
+
+La implementación de la simulación se realizó en Python y Unity, utilizando herramientas especializadas para robótica y gráficos.
+
+### 📌 Estructura del Código
+El código se divide en los siguientes módulos:
+
+- `finger.py`: Define la estructura de cada dedo con la convención de Denavit-Hartenberg.
+- `robot.py`: Modela la mano robótica con tres dedos.
+- `object.py`: Representa el objeto a manipular y sus puntos de contacto.
+- `RobotAPI.py`: Implementa una API basada en **FastAPI** para el control remoto.
+- `playground.py`: Espacio de pruebas para simulaciones.
+
+### 📌 Proceso de Simulación
+1. **Inicialización del Robot y Objeto:** Configuración inicial de los dedos y su posición en el espacio.  
+2. **Cálculo de Cinemática:** Determinación de posiciones finales usando matrices de transformación.  
+3. **Visualización:** Representación gráfica del sistema en 3D con `matplotlib`.  
+4. **Interacción Web:** Uso de `FastAPI` para permitir comandos remotos.  
+
+### 📌 API y Control Remoto
+Se creó una API para modificar los movimientos del robot en tiempo real:
+
+```python
+import requests
+
+url = "http://localhost:8000/{finger}"
+params = {"link2": 1.0}
+response = requests.get(url, params=params)
+print(response.json())  # Expected output: {'newAngle': <calculated_angle>}
+```
+
+
+
+
+## 📊 Resultados
+
+Se logró una manipulación precisa del objeto en la simulación, pero hubo dificultades en la implementación completa de las ecuaciones derivadas. Se recomienda mejorar el modelado de contacto y la optimización de cálculos cinemáticos para futuras versiones.
+
+🔗 **Video de la simulación:** [https://www.youtube.com/watch?v=g31woEZeYF8](#)
+
+---
+
+## 💡 Discusión y Futuro
+
+### 📌 Mejoras propuestas:
+- 🚀 **Optimización del modelo de cinemática inversa** para mejorar el rendimiento.
+- 🖐️ **Implementación de sensores táctiles simulados** para ajustar la fuerza de agarre.
+- 🤖 **Uso de aprendizaje automático** para mejorar la estabilidad del agarre en distintas condiciones.
+
+---
+
+## 📚 Referencias
+
+1. 📖 M. T. Mason y J. K. Salisbury, *Robot Hands and the Mechanics of Manipulation*, MIT Press, 1985.
+2. 📖 A. Bicchi y V. Kumar, *Robotic grasping and contact: A review*, IEEE ICRA, 2000.
+3. 📖 J. J. Craig, *Introduction to Robotics: Mechanics and Control*, 4ta edición, Pearson, 2017.
+
+---
+
+## 🛠️ Instalación y Uso
+
+### 📌 Requisitos:
+- 🐍 **Python 3.10+**
+- 🎮 **Unity con API de integración**
+- 📦 `roboticstoolbox`, `spatialmath`, `FastAPI`, `matplotlib`
+
+### 📌 Instalación:
 ```bash
-git clone https://github.com/AldonDC/Robotic-Hand-Unity.git
-cd Robotic-Hand-Unity
+pip install roboticstoolbox-python spatialmath matplotlib fastapi
