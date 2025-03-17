@@ -146,8 +146,7 @@ response = requests.get(url, params=params)
 print(response.json())  # Expected output: {'newAngle': <calculated_angle>}
 ```
 
-
-
+<br>
 
 ## 📊 Resultados
 
@@ -184,3 +183,11 @@ Se logró una manipulación precisa del objeto en la simulación, pero hubo difi
 ### 📌 Instalación:
 ```bash
 pip install roboticstoolbox-python spatialmath matplotlib fastapi
+
+## 🛠️ Debugging
+Si experimentas problemas con la API, prueba lo siguiente:
+- Verifica que todos los paquetes están instalados (`pip list`).
+- Asegúrate de ejecutar `uvicorn RobotAPI:app --reload` para iniciar la API.
+- Para probar manualmente la API, usa:
+```bash
+curl -X GET "http://127.0.0.1:8000/{finger}?link2=1.0"
