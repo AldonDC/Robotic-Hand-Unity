@@ -82,14 +82,27 @@ class Robot:
         # Show the plot
         plt.show()
 
-    def forward_kinematics(self, q, finger_idx):
+    def forward_kinematics(self, fingerNo):
         # Implement forward kinematics for the robot
-        fingers = [self.finger1, self.finger2, self.finger3]
-        return fingers[finger_idx].forward_kinematics(q)
+        if fingerNo == 1:
+            return self.finger1.forward_kinematics()
+        elif fingerNo == 2:
+            return self.finger2.forward_kinematics()
+        elif fingerNo == 3:
+            return self.finger3.forward_kinematics()
+        else:
+            print("Invalid")
     
-    def inverse_kinematics(self, T, finger_idx):
+    def inverse_kinematics(self, T, fingerNo):
         # Implement inverse kinematics for the robot
-        return self.fingers[finger_idx].inverse_kinematics(T)
+        if fingerNo == 1:
+            return self.finger1.inverse_kinematics(T)
+        elif fingerNo == 2:
+            return self.finger2.inverse_kinematics(T)
+        elif fingerNo == 3:
+            return self.finger3.inverse_kinematics(T)
+        else:
+            print("Invalid")
 
     def plot_with_sliders(self, qs=[[0, 0], [0, 0], [0, 0]]):
         # Create a new figure for the plot

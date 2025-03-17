@@ -96,7 +96,6 @@ class Obstacle:
         # Plot the coordinate frame
         self.frame.plot(frame="C", color="blue", ax=ax)
 
-        print(self.contact_points)
         for point in self.contact_points:
             position = point[:3, 3]
             ax.scatter(position[0], position[1], position[2], c='black', marker='o')
@@ -106,7 +105,7 @@ class Obstacle:
         ax.set_ylabel("Y-axis")
         ax.set_zlabel("Z-axis")
 
-    def modifyFrame(self, transMatrix):
+    def modifyFrame1(self, transMatrix):
         self.frame = sm.SE3(self.frame * transMatrix)
 
         transformed_corners = []
@@ -120,5 +119,65 @@ class Obstacle:
 
             transformed_corners.append(transformed_corner.t)
         
+        new_contacts = []
+        for coll in self.contact_points:
+            coll = transMatrix * coll
+            new_contacts.append(coll)
+        
+        self.contact_points = new_contacts
         self.corners = np.array(transformed_corners)
+
+    def modifyFrame(self, rotMatrix):
+        # Assuming rotMatrix is a 3x3 rotation matrix (no translation)
+        rotation = sm.SO3(rotMatrix)  # Create a rotation object from the matrix
+
+        # Apply the rotation to each corner (separating position and rotation)
+        transformed_corners = []
+        for corner in self.corners:
+            # Apply rotation to the corner position (corner is a 3D numpy array)
+            rotated_position = rotation * corner
+            transformed_corners.append(rotated_position)
+
+        # Apply the rotation to the contact points (which are numpy arrays)
+        new_contacts = []
+        for coll in self.contact_points:
+            # Ensure we use only the first 3 components of the contact point
+            rotated_contact = rotation * coll[:3]  # Take the first 3 components for rotation
+            new_contacts.append(rotated_contact)
+        
+        # Update corners and contact points
+        self.contact_points = new_contacts
+        self.corners = np.array(transformed_corners)
+
+        # The frame should remain unchanged, so do not modify it here
+        # This ensures that the obstacle's origin (frame) stays fixed
     
+    def modifyFrame2(self, rotMatrix):
+        # Assuming rotMatrix is a 3x3 rotation matrix (no translation)
+        rotation = sm.SO3(rotMatrix)  # Create a rotation object from the matrix
+
+        # Apply the rotation to each corner (separating position and rotation)
+        transformed_corners = []
+        for corner in self.corners:
+            # Apply rotation to the corner position (corner is a 3D numpy array)
+            rotated_position = rotation * corner
+            transformed_corners.append(rotated_position)
+
+        # Apply the rotation to the contact points but only vary the Z-coordinate
+        new_contacts = []
+        for coll in self.contact_points:
+            # Apply rotation to only the Z-coordinate, keeping X and Y the same
+            x, y, z = coll[:3]  # Extract x, y, and z components
+            
+            # Create the 3D point to apply rotation to, but only modify Z
+            rotated_point = rotation * np.array([x, y, z])  # Apply rotation to the full point
+            new_contact = np.array([x, y, rotated_point[2]])  # Keep x, y fixed, update z
+            
+            new_contacts.append(new_contact)
+        
+        # Update corners and contact points
+        self.contact_points = new_contacts
+        self.corners = np.array(transformed_corners)
+
+        # The frame should remain unchanged, so do not modify it here
+        # This ensures that the obstacle's origin (frame) stays fixed

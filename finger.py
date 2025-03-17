@@ -26,10 +26,22 @@ class Finger:
         self.robot.q = q + [0]
         self.robot.plot(self.robot.q, backend="pyplot", block=True)
     
-    def forward_kinematics(self, q):
-        q = q + [0]
-        return self.robot.fkine(q)
+    def forward_kinematics(self):
+        return self.robot.fkine(self.robot.q)
     
     def inverse_kinematics(self, T):
         return self.robot.ikine_LM(T)
     
+    def move_to_collision_point(self, collision_point):
+        # The collision point is an SE3 object (position) you want the robot to reach
+        target = sm.SE3(collision_point)  # Target position for the end-effector
+        
+        # Use inverse kinematics to compute joint angles that reach the target
+        q_solution = self.robot.ikine_LM(target)
+        
+        # Check if the solution is valid and update the robot's configuration
+        if q_solution.success:
+            self.adjustPosition(q_solution.q)  # Apply the joint angles
+            print("Successfully moved to collision point:", collision_point)
+        else:
+            print("No valid solution found for the collision point:", collision_point)

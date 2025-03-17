@@ -11,3 +11,4 @@ robot = Robot()
 obstacle = Obstacle(1, 0, 1.5, 1, 5, 1)
 
 robot.modifyFinger(1, (0, np.pi/2))
+
