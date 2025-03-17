@@ -18,7 +18,6 @@ Este proyecto integra una mano robótica simulada en Unity con una API desarroll
 
 ---
 
----
 
 ## 🔍 Introducción
 
