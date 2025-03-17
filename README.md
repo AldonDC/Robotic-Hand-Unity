@@ -18,46 +18,6 @@ Este proyecto integra una mano robótica simulada en Unity con una API desarroll
 
 ---
 
-
-## 📖 Índice  
-
-1. [Introducción](#introducción)  
-2. [Fundamentos Matemáticos](#fundamentos-matemáticos)  
-   - [Ecuaciones del Robot](#ecuaciones-del-robot)  
-   - [Modelado del Contacto](#modelado-del-contacto)  
-   - [Mecánica del Sistema](#mecánica-del-sistema)  
-   - [Dinámica del Sistema](#dinámica-del-sistema)  
-3. [Cinemática](#cinemática)  
-   - [Cinemática Directa](#cinemática-directa)  
-   - [Cinemática Inversa](#cinemática-inversa)  
-   - [Movimientos del Objeto](#movimientos-del-objeto)  
-4. [Modelos de Agarre](#modelos-de-agarre)  
-   - [Rodamiento y Deslizamiento](#rodamiento-y-deslizamiento)  
-   - [Comparación de Modelos](#comparación-de-modelos)  
-5. [Estado del Arte en Agarre Robótico](#estado-del-arte-en-agarre-robótico)  
-   - [Enfoques Analíticos](#enfoques-analíticos)  
-   - [Aprendizaje Automático en Agarre](#aprendizaje-automático-en-agarre)  
-   - [Modelos Híbridos](#modelos-híbridos)  
-6. [Implementación](#implementación)  
-   - [Estructura del Código](#estructura-del-código)  
-   - [Módulo de Dedo](#módulo-de-dedo)  
-   - [Módulo del Robot](#módulo-del-robot)  
-   - [Módulo del Objeto](#módulo-del-objeto)  
-   - [Proceso de Simulación](#proceso-de-simulación)  
-   - [API y Control Remoto](#api-y-control-remoto)  
-7. [Resultados y Validación](#resultados-y-validación)  
-   - [Optimización del Modelo](#optimización-del-modelo)  
-   - [Evaluación del Agarre](#evaluación-del-agarre)  
-8. [Discusión y Futuro](#discusión-y-futuro)  
-   - [Mejoras en Cinemática Inversa](#mejoras-en-cinemática-inversa)  
-   - [Control Adaptativo en Tiempo Real](#control-adaptativo-en-tiempo-real)  
-9. [Referencias](#referencias)  
-10. [Instalación y Uso](#instalación-y-uso)  
-    - [Requisitos](#requisitos)  
-    - [Instalación](#instalación)  
-    - [Ejecución](#ejecución)  
-
-
 ---
 
 ## 🔍 Introducción
