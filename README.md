@@ -148,13 +148,18 @@ print(response.json())  # Expected output: {'newAngle': <calculated_angle>}
 
 <br>
 
-## 📊 Resultados
+## 📊 Resultados  
 
-Se logró una manipulación precisa del objeto en la simulación, pero hubo dificultades en la implementación completa de las ecuaciones derivadas. Se recomienda mejorar el modelado de contacto y la optimización de cálculos cinemáticos para futuras versiones.
+La simulación logró una **manipulación precisa** del objeto, sin embargo, se presentaron desafíos en la implementación completa de las ecuaciones derivadas.  
 
-🔗 **Video de la simulación:** [https://www.youtube.com/watch?v=g31woEZeYF8](#)
+📌 **Principales hallazgos:**  
+- ✔️ Se logró modelar el contacto entre los dedos y el objeto con buena precisión.  
+- ⚠️ Dificultades en la integración de ecuaciones dinámicas completas.  
+- 🔄 Se recomienda mejorar la eficiencia computacional en el cálculo de cinemática inversa.  
 
----
+🔗 **Video de la simulación:**  
+[![Ver Video](https://img.youtube.com/vi/g31woEZeYF8/0.jpg)](https://www.youtube.com/watch?v=g31woEZeYF8)  
+
 
 ## 💡 Discusión y Futuro
 
